@@ -2,19 +2,19 @@
 This repo contains the project we built during the NIKSHATRA 2025 Hackathon.
 
 
-🌈 Moody Mood — Emotion-Based Wellness Web App
+# 🌈 Moody Mood — Emotion-Based Wellness Web App
 
 Built during the Nikshatra 2025 Hackathon
 
 Moody Mood is an interactive mental wellness web application designed to help users understand and regulate their emotions using quick activities, calming exercises, fun tasks, and personalized suggestions.
 Built by a beginner-friendly team within 15–20 hours, it focuses on simplicity, clean UI, and easy accessibility.
 
-⭐ Features
+# ⭐ Features
 
-🎭 Emotion-Based Dashboard
+# 🎭 Emotion-Based Dashboard
 Users can pick how they feel — Happy, Sad, Stressed, Anxious, Confused, Normal or Depressed — and instantly receive tailored suggestions.
 
-🧠 Instant Wellness Recommendations
+# 🧠 Instant Wellness Recommendations
 
 Each emotion triggers a set of curated activities such as:
 
@@ -30,10 +30,12 @@ Each emotion triggers a set of curated activities such as:
 
 * Depressed: Motivation tips, soothing activities (expandable in future)
 
-🖥️ Simple, Beginner-Friendly UI
+# 🖥️ Simple, Beginner-Friendly UI
+
 Designed with HTML & CSS for clean navigation and minimal distractions.
 
-🕹️ Interactive Experience
+# 🕹️ Interactive Experience
+
 Sections like:
 
 * Games
@@ -48,15 +50,16 @@ Sections like:
 
 give users a more engaging and relaxing experience.
 
- 🛠️ Tech Stack
+# 🛠️ Tech Stack
  
 * HTML5:  Structure & layout
 
 * CSS3:  Styling, UI design
 
-JavaScript: Functioning
+* JavaScript: Functioning
 
-📂 Project Structure
+# 📂 Project Structure
+
 MoodyMood
 
 │── index.html
@@ -72,7 +75,7 @@ MoodyMood
 │── README.md
 
 
-🚀 How It Works
+# 🚀 How It Works
 
 1. User selects their current emotion.
 
@@ -80,19 +83,19 @@ MoodyMood
 
 3. User can interact with:
 
-    * Activities
-    
-    * Games
-    
-    * Music
-    
-    * Short breaks
-    
-    * Breathing exercises
+   * Activities
+     
+   * Games
+   
+   * Music
+   
+   * Short Breaks
+   
+   * Breathing Exercises
     
 4. Future updates will add AI-based suggestions and more UX improvements.
 
-🧩 Why This Project?
+# 🧩 Why This Project?
 
 Mental wellness is often ignored due to:
 
@@ -104,13 +107,13 @@ Mental wellness is often ignored due to:
 
 Moody Mood gives users a quick, simple, stigma-free way to improve their emotional state.
 
-🙌 Made By 
+# 🙌 Made By 
 
 A team of 4 beginner (Abhinav Kumar, Bhavana V, Chaitra V, Deeksha G) developers participating in their first hackathon,with basic knowledge of HTML & CSS, taking on a wellness-based challenge and delivering a functional interactive solution in just 15–20 hours.
 
 #Hackathon🏆, Built for Nikshatra 2025 Hackathon
 
-📅 Future Improvements
+# 📅 Future Improvements
 
 1. Add JavaScript-based interactions
 
@@ -125,6 +128,6 @@ A team of 4 beginner (Abhinav Kumar, Bhavana V, Chaitra V, Deeksha G) developers
 6. User login & mood tracker
 
 
-📜 License
+# 📜 License
 
 Open-source — feel free to use!
