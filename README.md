@@ -80,66 +80,55 @@ MoodyMood
 
 3. User can interact with:
 
-     * Activities
-     
-     * Games
-     
-     * Music
-     
-     * Short breaks
-     
-     * Breathing exercises
-     
+    * Activities
+    
+    * Games
+    
+    * Music
+    
+    * Short breaks
+    
+    * Breathing exercises
+    
 4. Future updates will add AI-based suggestions and more UX improvements.
 
 🧩 Why This Project?
 
 Mental wellness is often ignored due to:
 
-1.Social hesitation
+1. Social hesitation
 
-2.Lack of time
+2. Lack of time
 
-3.Overwhelming apps
+3. Overwhelming apps
 
 Moody Mood gives users a quick, simple, stigma-free way to improve their emotional state.
 
 🙌 Made By 
 
-A team of 4 beginner developers participating in their first hackathon,with basic knowledge of HTML & CSS, taking on a wellness-based challenge and delivering a functional interactive solution in just 15–20 hours.
+A team of 4 beginner (Abhinav Kumar, Bhavana V, Chaitra V, Deeksha G) developers participating in their first hackathon,with basic knowledge of HTML & CSS, taking on a wellness-based challenge and delivering a functional interactive solution in just 15–20 hours.
 
-Team members
-
-Abhinav Kumar
-
-Bhavana V
-
-Chaitra V
-
-Deeksha G
-
-🏆 Hackathon
-
+🏆 # Hackathon
 Built for
-
 🎉 Nikshatra 2025 Hackathon
 
 📅 Future Improvements
 
-1.Add JavaScript-based interactions
+1. Add JavaScript-based interactions
 
-2.Add sound/music playlists
+2. Add sound/music playlists
 
-3.Add mini-games
+3. Add mini-games
 
-4.Include AI-based mood recommendations
+4. Include AI-based mood recommendations
 
-5.Better UI animations
+5. Better UI animations
 
-6.User login & mood tracker
-
+6. User login & mood tracker
 
 
 📜 License
 
-Open-source — feel free to use or improve the project!
+Open-source — feel free to use!
+
+@Bhavana78972
