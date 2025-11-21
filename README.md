@@ -108,9 +108,7 @@ Moody Mood gives users a quick, simple, stigma-free way to improve their emotion
 
 A team of 4 beginner (Abhinav Kumar, Bhavana V, Chaitra V, Deeksha G) developers participating in their first hackathon,with basic knowledge of HTML & CSS, taking on a wellness-based challenge and delivering a functional interactive solution in just 15–20 hours.
 
-🏆 # Hackathon
-Built for
-🎉 Nikshatra 2025 Hackathon
+#Hackathon🏆, Built for Nikshatra 2025 Hackathon
 
 📅 Future Improvements
 
@@ -130,5 +128,3 @@ Built for
 📜 License
 
 Open-source — feel free to use!
-
-@Bhavana78972
