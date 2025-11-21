@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😡 Angry Hub</title>
+    <style>
+        /* Styling for the Angry Hub (Transitioning to Calm) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fce4e4;
+            /* Very light red/pink for initial stress */
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 3px solid #ff5252;
+            /* Red border */
+        }
+
+        h1 {
+            color: #d32f2f;
+            /* Deep red for anger */
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .list-item {
+            background-color: #e3f2fd;
+            /* Calming light blue */
+            margin: 15px 0;
+            padding: 20px;
+            border-left: 5px solid #1976d2;
+            /* Deep blue highlight */
+            border-radius: 8px;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+
+        .list-item:hover {
+            background-color: #bbdefb;
+        }
+
+        .list-item h2 {
+            margin-top: 0;
+            color: #1976d2;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        /* Styling for Item 1 and 4 */
+        #reaction-area,
+        #counting-area {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px dashed #1976d2;
+            border-radius: 5px;
+            background-color: #ffffff;
+            display: none;
+        }
+
+        #ai-output,
+        #counting-output {
+            margin-top: 10px;
+            font-style: italic;
+            color: #00796b;
+        }
+
+        button {
+            background-color: #ff5252;
+            /* Angry red button */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e53935;
+        }
+
+        /* Link Styling */
+        .list-item a {
+            color: #ff5252;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .list-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Styling for Counting Area */
+        #countdown {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #1976d2;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>😡 Angry Hub: Find Your Calm</h1>
+
+        <div class="list-item">
+            <h2 onclick="toggleArea('reaction-area')">1. What made you angry? (Let's talk)</h2>
+            <div id="reaction-area">
+                <label for="angry-input">Tell me what happened:</label><br>
+                <input type="text" id="angry-input" placeholder="e.g., My meeting was cancelled..."
+                    style="width: 80%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                <button onclick="getAICalmingReaction()">Get Calming Reaction</button>
+                <p id="ai-output"></p>
+            </div>
+        </div>
+
+        <div class="list-item">
+            <h2>2. 60 Seconds to Reset 🧘</h2>
+            <p>Take one minute to try a fun, distracting exercise. Stand up and try this:</p>
+            <ul>
+                <li>The T-Rex Wiggle: Tense your hands into tiny T-Rex arms and wiggle your entire body vigorously
+                    for 15 seconds.</li>
+                <li>The Silent Scream: Take a deep breath in, hold it, and let out a huge, silent scream (or a
+                    gentle hum) as you exhale for 10 seconds.</li>
+                <li>The Confused Chicken: Flap your arms slowly, lift one knee, and tilt your head for 15 seconds.
+                </li>
+            </ul>
+            <p style="font-size: 0.9em;">Why this helps: Engaging your body and finding humor breaks the mental loop
+                of anger!</p>
+        </div>
+
+        <div class="list-item">
+            <h2>3. Calming 3-Minute Music Break 🎧</h2>
+            <p>Listen to this short track to lower your heart rate and shift your focus.</p>
+            <p><a href="https://www.youtube.com/watch?v=S-Rj5x4O0t4" target="_blank">3-Minute Calming Lo-Fi Music
+                    (YouTube)</a></p>
+        </div>
+
+        <div class="list-item">
+            <h2 onclick="toggleArea('counting-area')">4. Communication Focus: Backward Count 🔢</h2>
+            <div id="counting-area">
+                <label for="start-number">Enter a number to count back from (e.g., 20):</label><br>
+                <input type="number" id="start-number" value="10" min="1"
+                    style="width: 50px; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                <button onclick="startCounting()">Start Counting</button>
+                <div id="countdown"></div>
+
+                <div id="user-input-section" style="margin-top: 10px; display: none;">
+                    <p style="font-weight: bold;">AI says: <span id="current-ai-number" style="color: #d32f2f;"></span>.
+                        🗣️ **Now, say the next number out loud.**</p>
+                    <label for="user-guess" style="margin-top: 5px;">*Simulate AI Detection:* Enter the number you just
+                        said:</label><br>
+                    <input type="number" id="user-guess"
+                        style="width: 50px; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
+                    <button onclick="checkNumber()">Check My Spoken Number</button>
+                </div>
+                <p id="counting-output"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Global variables for the counting game
+        let currentNumber = 0;
+
+        // --- Generic Toggle Function ---
+        function toggleArea(id) {
+            const area = document.getElementById(id);
+            area.style.display = area.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // --- Item 1: Calming AI Reaction ---
+        function getAICalmingReaction() {
+            const input = document.getElementById('angry-input').value.trim().toLowerCase();
+            const outputElement = document.getElementById('ai-output');
+            let reaction = '';
+
+            if (input === '') {
+                reaction = "It's okay to feel upset. Just breathe, and tell me one small thing that bothered you.";
+            } else if (input.includes('person') || input.includes('friend') || input.includes('boss')) {
+                reaction = "Dealing with people can be exhausting. Remember, their actions are about them, not your worth. Let's take a deep breath in... and out. You've got this.";
+            } else if (input.includes('traffic') || input.includes('slow') || input.includes('wait')) {
+                reaction = "Frustration over lack of control is tough. This moment is temporary. Use this time to notice 5 things you can see right now. Ground yourself.";
+            } else if (input.includes('fail') || input.includes('mistake') || input.includes('lose')) {
+                reaction = "Mistakes are just data points for success. Be kind to yourself. You are learning and growing. Go get a glass of water.";
+            } else {
+                reaction = `Thank you for sharing that. It sounds genuinely frustrating. Let's practice the 5-4-3-2-1 rule: Name 5 things you see, 4 things you touch, 3 things you hear, 2 things you smell, and 1 thing you taste. Breathe. You are safe.`;
+            }
+
+            outputElement.textContent = `AI Response: ${reaction} 💙`;
+            outputElement.style.color = '#1976d2'; // Calming blue
+        }
+
+        // --- Item 4: Backward Counting Game (Simulated Voice Check) ---
+
+        function startCounting() {
+            const startInput = document.getElementById('start-number');
+            const output = document.getElementById('counting-output');
+            const inputSection = document.getElementById('user-input-section');
+            const startNum = parseInt(startInput.value);
+
+            if (isNaN(startNum) || startNum < 1) {
+                output.textContent = "Please enter a valid starting number (1 or greater).";
+                output.style.color = '#d32f2f';
+                return;
+            }
+
+            currentNumber = startNum;
+            output.textContent = "Let's begin! AI will start the count, and you must say the correct next number.";
+            output.style.color = '#00796b';
+            inputSection.style.display = 'block';
+
+            // AI says the starting number
+            document.getElementById('current-ai-number').textContent = currentNumber;
+            document.getElementById('user-guess').value = '';
+
+            // Decrement for the user's turn
+            currentNumber--;
+        }
+
+        function checkNumber() {
+            const userGuessInput = document.getElementById('user-guess');
+            const output = document.getElementById('counting-output');
+            const aiNumberDisplay = document.getElementById('current-ai-number');
+
+            const userGuess = parseInt(userGuessInput.value);
+            const expectedNumber = currentNumber + 1;
+
+            if (isNaN(userGuess)) {
+                output.textContent = "Oops! That wasn't a number. Try again: What comes after " + expectedNumber + "?";
+                output.style.color = '#d32f2f'; // Reaction: Missed
+                userGuessInput.value = '';
+                return;
+            }
+
+            if (userGuess === expectedNumber) {
+                // Correct guess - AI reaction is "Right"
+                output.textContent = `AI Response: "Right, ${expectedNumber}. Good focus!" The next AI number is: ${currentNumber}`;
+                output.style.color = '#00796b';
+
+                if (currentNumber <= 0) {
+                    output.textContent = "SUCCESS! You reached zero. Take that focus and apply it to the rest of your day! You are calm. 🌟";
+                    output.style.color = '#1976d2';
+                    document.getElementById('user-input-section').style.display = 'none';
+                } else {
+                    // AI says the next number
+                    aiNumberDisplay.textContent = currentNumber;
+                    userGuessInput.value = '';
+                    currentNumber--; // Decrement for the *user's* next turn
+                }
+
+            } else {
+                // Incorrect guess - AI reaction is "Wrong" and restart
+                output.textContent = `AI Response: "WRONG! That's a miss. The number was ${expectedNumber}. Take a deep breath. Let's restart the sequence from ${expectedNumber}."`;
+                output.style.color = '#d32f2f'; // Reaction: Missed (Red)
+                currentNumber = expectedNumber - 1; // Reset to the correct number - 1
+                aiNumberDisplay.textContent = expectedNumber; // AI repeats the expected number
+                userGuessInput.value = '';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

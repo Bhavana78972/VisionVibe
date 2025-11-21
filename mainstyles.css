@@ -1,0 +1,277 @@
+/* Main Home Page Body Styling */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(90deg, #d5ea8c, #d587e3);
+}
+
+/* Main Home Page Header Styling */
+header {
+    font-family: Algerian, Helvetica, sans-serif;
+    background: linear-gradient(90deg, #e5ec04, #ec0515);
+    padding: 25px 0;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: bold;
+    color: rgb(6, 65, 227);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.emoji {
+    font-size: 5rem;
+}
+
+.left {
+    margin-right: 20px;
+}
+
+.right {
+    margin-left: 20px;
+}
+
+.title-text {
+    display: inline-block;
+}
+
+:root {
+    --page-bg: #f4f4f4;
+    --gap: 18px;
+    --card-radius: 14px;
+    --card-padding: 22px;
+    --title-size: 3rem;
+    --emoji-size: 3.6rem;
+    --label-size: 1.05rem;
+    --max-width: 1100px;
+}
+
+/* base */
+* {
+    box-sizing: border-box
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background: var(--page-bg);
+    font-family: Inter, Arial, Helvetica, sans-serif;
+    color: #111
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 28px auto;
+    padding: 18px
+}
+
+/* header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #e5ec04, #ec0515);
+    color: rgb(21, 6, 227);
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: var(--title-size);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* header emojis */
+.header-emoji {
+    font-size: 2rem;
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.header-emoji.left {
+    justify-content: flex-start
+}
+
+.header-emoji.right {
+    justify-content: flex-end
+}
+
+/* keep title centered on small screens */
+.title-text {
+    flex: 1;
+    text-align: center;
+    font-size: 1.05em;
+    letter-spacing: 3px
+}
+
+/* grid */
+.mood-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap);
+    margin-top: 22px;
+}
+
+/* cards */
+.mood-card {
+    font-family: Algerian, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: bold;
+    color: rgb(6, 65, 227);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-radius: var(--card-radius);
+    padding: var(--card-padding);
+    min-height: 136px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    box-shadow: 0 6px 18px rgba(12, 12, 12, 0.07);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.mood-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(12, 12, 12, 0.12);
+}
+
+.mood-emoji {
+    font-size: var(--emoji-size);
+    margin-bottom: 10px;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
+}
+
+.mood-label {
+    font-weight: 700;
+    font-size: var(--label-size);
+    letter-spacing: 0.4px;
+}
+
+/* gradients for moods */
+.happy {
+    background: linear-gradient(135deg, #ffd54a, #ffab40);
+    color: #222;
+}
+
+.normal {
+    background: linear-gradient(135deg, #d4f1ed, #bfe9d8);
+    color: #0b3b2e;
+}
+
+.confused {
+    background: linear-gradient(135deg, #c3a0ff, #ffb3e6);
+    color: #290042;
+}
+
+.anxious {
+    background: linear-gradient(135deg, #ffd2a5, #ff6b6b);
+    color: #2b0b00;
+}
+
+.sad {
+    background: linear-gradient(135deg, #7fb3ff, #4a90e2);
+    color: #041a3a;
+}
+
+.stressed {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    color: #3a1700;
+}
+
+.depressed {
+    background: linear-gradient(135deg, #2b2f77, #0f172a);
+    color: #e6eefb;
+}
+
+.angry {
+    background: linear-gradient(135deg, #ff4e50, #f9d423);
+    color: #2b0b00;
+}
+
+/* responsive */
+@media (max-width:900px) {
+    .mood-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header {
+        font-size: 2.2rem
+    }
+}
+
+@media (max-width:420px) {
+    .mood-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mood-card {
+        min-height: 110px;
+        padding: 16px cursor;
+    }
+
+    .mood-emoji {
+        font-size: 2.8rem
+    }
+
+    .mood-label {
+        font-family: Algerian, Helvetica, sans-serif;
+        text-align: center;
+        font-size: 5rem;
+    }
+
+    header {
+        font-size: 1.6rem;
+        padding: 14px
+    }
+}
+
+/* Fun Games banner (same style as header) */
+.fun-games-banner {
+    font-family: Algerian, Helvetica, sans-serif;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 25px 0;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #15d357, #ef2eef);
+    color: rgb(251, 71, 0);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 3rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.fun-emoji {
+    font-size: 4rem;
+}
+
+.fun-text {
+    font-size: 4rem;
+}
+
+.mood-link,
+.mood-link:visited,
+.mood-link:active {
+    text-decoration: none !important;
+    color: inherit !important;
+    outline: none !important;
+    border: none !important;
+    display: block;
+}
+
+.mood-card {
+    cursor: pointer !important;
+}

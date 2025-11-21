@@ -1,0 +1,79 @@
+<!-- This is our main Home Page. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moody Mood</title>
+
+    <link rel="stylesheet" href="mainstyles.css">
+
+    <script src="mainscript.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <span class="emoji left">😄 🙂</span>
+        <span class="title-text">Moody Mood</span>
+        <span class="emoji right">😔 😡</span>
+    </header>
+    <section class="mood-grid" aria-label="Mood selection grid">
+        <!-- Row 1 -->
+        <a href="Happy.html" class="mood-link">
+            <div class="mood-card happy" role="article" aria-label="Happy mood">
+                <div class="mood-emoji" aria-hidden="true">😄</div>
+                <div class="mood-label">Happy</div>
+            </div>
+        </a>
+
+        <div class="mood-card normal" role="article" aria-label="Normal mood">
+            <div class="mood-emoji" aria-hidden="true">🙂</div>
+            <div class="mood-label">Normal</div>
+        </div>
+
+        <div class="mood-card confused" role="article" aria-label="Confused mood">
+            <div class="mood-emoji" aria-hidden="true">😕</div>
+            <div class="mood-label">Confused</div>
+        </div>
+
+        <div class="mood-card anxious" role="article" aria-label="Anxious mood">
+            <div class="mood-emoji" aria-hidden="true">😰</div>
+            <div class="mood-label">Anxious</div>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="mood-card sad" role="article" aria-label="Sad mood">
+            <div class="mood-emoji" aria-hidden="true">😢</div>
+            <div class="mood-label">Sad</div>
+        </div>
+
+        <div class="mood-card stressed" role="article" aria-label="Stressed mood">
+            <div class="mood-emoji" aria-hidden="true">😫</div>
+            <div class="mood-label">Stressed</div>
+        </div>
+
+        <div class="mood-card depressed" role="article" aria-label="Depressed mood">
+            <div class="mood-emoji" aria-hidden="true">😞</div>
+            <div class="mood-label">Depressed</div>
+        </div>
+
+        <a href="Angry.html" class="mood-link">
+            <div class="mood-card angry" role="article" aria-label="Angry mood">
+                <div class="mood-emoji" aria-hidden="true">😡</div>
+                <div class="mood-label">Angry</div>
+            </div>
+        </a>
+    </section>
+    <!-- Fun Games Section -->
+    <section class="fun-games-banner">
+        <span class="fun-emoji">🎮 😄</span>
+        <span class="fun-text">Fun Games</span>
+        <span class="fun-emoji">😎 🕹️</span>
+    </section>
+
+    </div>
+</body>
+
+</html>
