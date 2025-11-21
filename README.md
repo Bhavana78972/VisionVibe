@@ -1,13 +1,11 @@
 # VisionVibe
-This repo contains the project we built during the NIKSHATRA 2025 Hackathon.
-
 
 # 🌈 Moody Mood — Emotion-Based Wellness Web App
 
-Built during the Nikshatra 2025 Hackathon
-
 Moody Mood is an interactive mental wellness web application designed to help users understand and regulate their emotions using quick activities, calming exercises, fun tasks, and personalized suggestions.
 Built by a beginner-friendly team within 15–20 hours, it focuses on simplicity, clean UI, and easy accessibility.
+
+Built during the Nikshatra 2025 Hackathon
 
 # ⭐ Features
 
@@ -107,7 +105,7 @@ Mental wellness is often ignored due to:
 
 Moody Mood gives users a quick, simple, stigma-free way to improve their emotional state.
 
-# 🙌 Made By 
+# 🙌 Made By VisionVibe
 
 A team of 4 beginner (Abhinav Kumar, Bhavana V, Chaitra V, Deeksha G) developers participating in their first hackathon,with basic knowledge of HTML & CSS, taking on a wellness-based challenge and delivering a functional interactive solution in just 15–20 hours.
 
