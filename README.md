@@ -18,17 +18,17 @@ Users can pick how they feel — Happy, Sad, Stressed, Anxious, Confused, Normal
 
 Each emotion triggers a set of curated activities such as:
 
-Happy: Enjoy the present, mini celebrations, fun games
+* Happy: Enjoy the present, mini celebrations, fun games
 
-Sad: Funny activities, music, talk to someone
+* Sad: Funny activities, music, talk to someone
 
-Stressed: Meditation, walking
+* Stressed: Meditation, walking
 
-Anxious: 5-4-3-2-1 grounding rule, ambient sounds
+* Anxious: 5-4-3-2-1 grounding rule, ambient sounds
 
-Confused: Take key notes, puzzles, small break
+* Confused: Take key notes, puzzles, small break
 
-Depressed: Motivation tips, soothing activities (expandable in future)
+* Depressed: Motivation tips, soothing activities (expandable in future)
 
 🖥️ Simple, Beginner-Friendly UI
 Designed with HTML & CSS for clean navigation and minimal distractions.
@@ -36,23 +36,23 @@ Designed with HTML & CSS for clean navigation and minimal distractions.
 🕹️ Interactive Experience
 Sections like:
 
-Games
+* Games
 
-Music
+* Music
 
-Notes
+* Notes
 
-Activities
+* Activities
 
-Ambient sounds
+* Ambient sounds
 
 give users a more engaging and relaxing experience.
 
  🛠️ Tech Stack
  
-HTML5: Structure & layout
+* HTML5:  Structure & layout
 
-CSS3: Styling, UI design
+* CSS3:  Styling, UI design
 
 JavaScript: Functioning
 
@@ -74,23 +74,23 @@ MoodyMood
 
 🚀 How It Works
 
-1.User selects their current emotion.
+1. User selects their current emotion.
 
-2.The app displays tailored suggestions for that emotion.
+2. The app displays tailored suggestions for that emotion.
 
-3.User can interact with:
+3. User can interact with:
 
-     Activities
+     * Activities
      
-     Games
+     * Games
      
-     Music
+     * Music
      
-     Short breaks
+     * Short breaks
      
-     Breathing exercises
+     * Breathing exercises
      
-4.Future updates will add AI-based suggestions and more UX improvements.
+4. Future updates will add AI-based suggestions and more UX improvements.
 
 🧩 Why This Project?
 
