@@ -53,7 +53,7 @@
         .list-item h2 {
             margin-top: 0;
             color: #1976d2;
-            cursor: pointer;
+            /* Removed cursor: pointer; since the click action is removed on item 1 h2 */
             display: inline-block;
         }
 
@@ -66,6 +66,7 @@
             border-radius: 5px;
             background-color: #ffffff;
             display: none;
+            /* Default for all, will be overridden for #reaction-area in HTML */
         }
 
         #ai-output,
@@ -114,15 +115,29 @@
 </head>
 
 <body>
-
+    <div style="text-align:left; margin-top: 10px;">
+        <a href="HomePage.html" style="
+           display:inline-block;
+           background-color:#d12c2f;
+           color:white;
+           padding:10px 20px;
+           border-radius:6px;
+           text-decoration:none;
+           font-size:16px;
+           transition:0.3s;">
+            ⬅ Back
+        </a>
+    </div>
     <div class="container">
         <h1>😡 Angry Hub: Find Your Calm</h1>
 
         <div class="list-item">
-            <h2 onclick="toggleArea('reaction-area')">1. What made you angry? (Let's talk)</h2>
-            <div id="reaction-area">
+            <h2>What made you angry? (Let's talk)</h2>
+            <div id="reaction-area" style="display: block;">
                 <label for="angry-input">Tell me what happened:</label><br>
-                <input type="text" id="angry-input" placeholder="e.g., My meeting was cancelled..."
+                <input type="text" id="angry-input"
+                    value="My meeting was cancelled at the last minute for no good reason."
+                    placeholder="e.g., My meeting was cancelled..."
                     style="width: 80%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px;">
                 <button onclick="getAICalmingReaction()">Get Calming Reaction</button>
                 <p id="ai-output"></p>
@@ -130,7 +145,7 @@
         </div>
 
         <div class="list-item">
-            <h2>2. 60 Seconds to Reset 🧘</h2>
+            <h2>60 Seconds to Reset 🧘</h2>
             <p>Take one minute to try a fun, distracting exercise. Stand up and try this:</p>
             <ul>
                 <li>The T-Rex Wiggle: Tense your hands into tiny T-Rex arms and wiggle your entire body vigorously
@@ -145,14 +160,14 @@
         </div>
 
         <div class="list-item">
-            <h2>3. Calming 3-Minute Music Break 🎧</h2>
+            <h2>Calming 3-Minute Music Break 🎧</h2>
             <p>Listen to this short track to lower your heart rate and shift your focus.</p>
             <p><a href="https://www.youtube.com/watch?v=S-Rj5x4O0t4" target="_blank">3-Minute Calming Lo-Fi Music
                     (YouTube)</a></p>
         </div>
 
         <div class="list-item">
-            <h2 onclick="toggleArea('counting-area')">4. Communication Focus: Backward Count 🔢</h2>
+            <h2 onclick="toggleArea('counting-area')">Communication Focus: Backward Count 🔢</h2>
             <div id="counting-area">
                 <label for="start-number">Enter a number to count back from (e.g., 20):</label><br>
                 <input type="number" id="start-number" value="10" min="1"
@@ -179,7 +194,7 @@
         // Global variables for the counting game
         let currentNumber = 0;
 
-        // --- Generic Toggle Function ---
+        // --- Generic Toggle Function (Only used by Item 4 now) ---
         function toggleArea(id) {
             const area = document.getElementById(id);
             area.style.display = area.style.display === 'block' ? 'none' : 'block';
@@ -187,6 +202,7 @@
 
         // --- Item 1: Calming AI Reaction ---
         function getAICalmingReaction() {
+            // Use .value to get the input text, including the default value
             const input = document.getElementById('angry-input').value.trim().toLowerCase();
             const outputElement = document.getElementById('ai-output');
             let reaction = '';
@@ -195,7 +211,7 @@
                 reaction = "It's okay to feel upset. Just breathe, and tell me one small thing that bothered you.";
             } else if (input.includes('person') || input.includes('friend') || input.includes('boss')) {
                 reaction = "Dealing with people can be exhausting. Remember, their actions are about them, not your worth. Let's take a deep breath in... and out. You've got this.";
-            } else if (input.includes('traffic') || input.includes('slow') || input.includes('wait')) {
+            } else if (input.includes('traffic') || input.includes('slow') || input.includes('wait') || input.includes('cancelled')) {
                 reaction = "Frustration over lack of control is tough. This moment is temporary. Use this time to notice 5 things you can see right now. Ground yourself.";
             } else if (input.includes('fail') || input.includes('mistake') || input.includes('lose')) {
                 reaction = "Mistakes are just data points for success. Be kind to yourself. You are learning and growing. Go get a glass of water.";

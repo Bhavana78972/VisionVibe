@@ -189,8 +189,8 @@ header {
 }
 
 .depressed {
-    background: linear-gradient(135deg, #2b2f77, #0f172a);
-    color: #e6eefb;
+    background: linear-gradient(135deg, #2b2f77, #2e5bc3);
+    color: #111111;
 }
 
 .angry {
@@ -275,3 +275,94 @@ header {
 .mood-card {
     cursor: pointer !important;
 }
+
+/* Remove ALL link effects for the banner */
+a,
+a:link,
+a:visited,
+a:active,
+a:hover,
+a:focus,
+a:focus-visible {
+    text-decoration: none !important;
+    color: inherit !important;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Banner style itself */
+.fun-games-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Optional hover effect (no underline, no line) */
+a:hover .fun-games-banner {
+    transform: translateY(-3px);
+    transition: 0.2s ease;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== FOOTER STYLING ===== */
+.mm-footer {
+    background: #f7f9fc;
+    padding: 40px 20px;
+    margin-top: 50px;
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    color: #333;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: auto;
+}
+
+.footer-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ff9800;
+}
+
+.footer-desc {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #555;
+}
+
+.footer-links {
+    margin: 22px 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: 0.2s ease;
+}
+
+.footer-links a:hover {
+    background: #ffe3b7;
+    color: #000;
+}
+
+.footer-copy {
+    margin-top: 12px;
+    font-size: 13px;
+    color: #666;
+}
+

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress Relief Toolkit - Calming Design</title>
+    <style>
+        /* --- CSS STYLES --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            /* NEW Light Green Calming Background */
+            background-color: #f1f8e9;
+            color: #333;
+            margin: 0;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        /* Header and Emoji */
+        header h1 {
+            color: #33691e;
+            /* Darker green tone for contrast */
+            font-size: 2.5em;
+            margin-bottom: 0;
+        }
+
+        .emoji {
+            font-size: 4em;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+            color: #d9534f;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Container for the Cards */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        /* Card Styling - Enhanced for Presentable Separation */
+        .card {
+            background-color: #ffffff;
+            /* Softer border color for calmness (keeping original light blue tone for internal contrast) */
+            border: 1px solid #b2dfdb;
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            max-width: 290px;
+            /* Deeper shadow for a "lifted" feel */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            /* More noticeable lift on hover */
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            /* Updated to a calming green/blue for headings */
+            color: #33691e;
+            margin-top: 0;
+            font-size: 1.6em;
+            border-bottom: 2px solid #e0f7fa;
+            /* Subtle separation line */
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .timer-display {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #388e3c;
+            /* Stronger Calming Green */
+        }
+
+        .guidance {
+            font-style: italic;
+            color: #555;
+            min-height: 20px;
+        }
+
+        .btn {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 17px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            width: 100%;
+            /* Make buttons full width for clean look */
+        }
+
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+
+        /* Image and Placeholder Styling */
+        .asana-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #b2dfdb;
+        }
+
+        .music-player-placeholder {
+            background-color: #f0fdfd;
+            /* Lighter background for the player section */
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 15px;
+            border: 1px dashed #00bcd4;
+        }
+
+        .pose-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pose-list li {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .pose-list figcaption {
+            font-style: italic;
+            font-size: 0.8em;
+            color: #555;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="text-align:left; margin-top: 10px;">
+        <a href="HomePage.html" style="
+           display:inline-block;
+           background-color:#b1e07b;
+           color:white;
+           padding:10px 20px;
+           border-radius:6px;
+           text-decoration:none;
+           font-size:16px;
+           transition:0.3s;
+       " onmouseover="this.style.backgroundColor='#7cb342'" onmouseout="this.style.backgroundColor='#8bc34a'">
+            ⬅ Back
+        </a>
+    </div>
+    <header>
+        <div class="emoji">😩</div>
+        <h1>Stress Relief Toolkit</h1>
+
+    </header>
+
+    <div class="container">
+
+        <div class="card" id="card-1">
+            <h2>1. Guided Breathing 🗣️</h2>
+            <p><strong>Goal:</strong> 4 seconds in, 6 seconds out. The voice will guide you.</p>
+            <div class="timer-display" id="meditation-timer">00:00</div>
+            <div class="guidance" id="meditation-guidance">Ready to start...</div>
+            <button class="btn" onclick="toggleMeditation()">Start Breathing</button>
+        </div>
+
+        <div class="card" id="card-2">
+            <h2>2. Easy Yoga Flow ✨</h2>
+            <p>Start with these poses to release tension.</p>
+            <ul class="pose-list">
+                <li>**Cat-Cow Pose:** 60 seconds</li>
+                <figure>
+                    <img src="https://i.ytimg.com/vi/kqnua4rHVVA/sddefault.jpg" alt="Cat-Cow Pose" class="asana-image">
+
+                    <figcaption>*Gently flex and extend the spine.*</figcaption>
+                </figure>
+                <li>**Child's Pose:** 120 seconds</li>
+                <figure>
+                    <img src="data:image/jpeg;base64,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"
+                        alt="Child's Pose" class="asana-image">
+                    <figcaption>*Resting pose to calm the brain.*</figcaption>
+                </figure>
+                <li>**Corpse Pose (Savasana):** 180 seconds</li>
+                <figure>
+                    <img src="https://cdn.prod.website-files.com/683b218dcc58f93d54ce8e1d/68ad86bfbde110a4a4addae5_68a5c55771a413d6881148d5_oRc2oJkmQkGPYhAyfbhG.jpeg"
+                        alt="Corpse Pose (Savasana)" class="asana-image">
+
+
+                    [Image of Corpse Pose]
+
+                    <figcaption>*Total relaxation. Let your body sink.*</figcaption>
+                </figure>
+            </ul>
+            <div class="timer-display" id="yoga-timer">00:00</div>
+            <div class="guidance" id="yoga-guidance">Current: Ready</div>
+            <button class="btn" onclick="startYoga()">Start Flow</button>
+        </div>
+
+        <div class="card" id="card-3">
+            <h2>3. Peaceful Music 🎶</h2>
+            <p>Select a calming soundscape to listen to.</p>
+            <div>
+
+                <iframe id="musicFrame" width="100%" height="300" src="https://www.youtube.com/embed/cI4ryatVkKw"
+                    frameborder="0" allowfullscreen>
+                </iframe>
+            </div>
+
+            <script>
+                function playMusic() {
+                    // Autoplay by reloading with autoplay param
+                    const frame = document.getElementById('musicFrame');
+                    let src = frame.src;
+                    if (!src.includes("autoplay=1")) {
+                        frame.src += (src.includes("?") ? "&" : "?") + "autoplay=1";
+                    }
+                    speak("Playing peaceful music");
+                }
+
+                // Text-to-speech (defined in the global script block later)
+                function speak(text) {
+                    const speech = new SpeechSynthesisUtterance(text);
+                    window.speechSynthesis.speak(speech);
+                }
+            </script>
+
+        </div>
+
+        <div class="card" id="card-4">
+            <h2>4. Hydration Check 💧</h2>
+            <p>Dehydration increases stress! Grab a glass of water.</p>
+            <p style="font-size: 3em;">🥤</p>
+            <button class="btn" onclick="speak('Remember to stay hydrated! Good job.');">I Drank Water!</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- TEXT-TO-SPEECH UTILITY ---
+        function speak(text, rate = 1.0) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.pitch = 1;
+                utterance.rate = rate;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                console.warn("Text-to-speech not supported in this browser.");
+            }
+        }
+
+
+        // --- 1. Meditation Timer (Voice Guided Breath In/Out) ---
+        let meditationInterval = null;
+        let meditationTime = 0;
+        let isBreathingIn = true;
+
+        function toggleMeditation() {
+            const button = document.querySelector('#card-1 .btn');
+
+            if (meditationInterval) {
+                // Stop the timer
+                clearInterval(meditationInterval);
+                meditationInterval = null;
+                button.textContent = 'Resume Breathing';
+                const message = 'Meditation Paused.';
+                document.getElementById('meditation-guidance').textContent = message;
+                speak(message, 1.0);
+            } else {
+                // Start/Resume the timer
+                meditationInterval = setInterval(updateMeditation, 1000);
+                button.textContent = 'Stop Breathing';
+                speak('Starting the 4 second in, 6 second out breathing exercise. Relax your shoulders.', 0.9);
+            }
+        }
+
+        function updateMeditation() {
+            meditationTime++;
+
+            // Format time display
+            const minutes = Math.floor(meditationTime / 60).toString().padStart(2, '0');
+            const seconds = (meditationTime % 60).toString().padStart(2, '0');
+            document.getElementById('meditation-timer').textContent = `${minutes}:${seconds}`;
+
+            // Breathing Guidance Logic (4 seconds IN, 6 seconds OUT)
+            const cycleTime = meditationTime % 10;
+
+            // Phase Transitions
+            if (cycleTime === 1) {
+                if (meditationTime > 1) {
+                    isBreathingIn = true;
+                    document.getElementById('meditation-guidance').textContent = 'Breathe IN (4s)';
+                    speak('Breathe IN');
+                }
+            } else if (cycleTime === 5) {
+                isBreathingIn = false;
+                document.getElementById('meditation-guidance').textContent = 'Breathe OUT (6s)';
+                speak('Breathe OUT');
+            }
+
+            // Countdown Logic (only speak the last three seconds)
+            if (isBreathingIn && cycleTime > 0 && cycleTime < 5) {
+                const timeLeft = 4 - cycleTime;
+                document.getElementById('meditation-guidance').textContent = `Breathe IN (Time left: ${timeLeft}s)`;
+                if (timeLeft <= 3 && timeLeft > 0) {
+                    speak(`${timeLeft}`);
+                }
+            } else if (!isBreathingIn && cycleTime >= 5) {
+                const timeLeft = 10 - cycleTime;
+                document.getElementById('meditation-guidance').textContent = `Breathe OUT (Time left: ${timeLeft}s)`;
+                if (timeLeft <= 3 && timeLeft > 0) {
+                    speak(`${timeLeft}`);
+                }
+            }
+        }
+
+
+        // --- 2. Yoga Timer (Voice Guided Flow) ---
+        let yogaInterval = null;
+        let yogaTime = 0;
+        let poseIndex = 0;
+        const yogaFlow = [
+            { name: "Cat-Cow Pose", duration: 60, speakStart: "Start Cat Cow Pose. Gentle movement." },
+            { name: "Child's Pose", duration: 120, speakStart: "Move into Child's Pose. Rest and restore." },
+            { name: "Corpse Pose (Savasana)", duration: 180, speakStart: "Final resting pose, Savasana. Complete relaxation." }
+        ];
+        let currentPoseStartTime = 0;
+
+        function startYoga() {
+            if (yogaInterval) {
+                clearInterval(yogaInterval);
+            }
+            yogaTime = 0;
+            poseIndex = 0;
+            currentPoseStartTime = 0;
+            document.querySelector('#card-2 .btn').textContent = 'Restart Flow';
+            speak('Starting your stress relief yoga flow.', 0.9);
+            yogaInterval = setInterval(updateYoga, 1000);
+        }
+
+        function updateYoga() {
+            if (poseIndex >= yogaFlow.length) {
+                clearInterval(yogaInterval);
+                const message = 'Flow Complete! Feel the calm.';
+                document.getElementById('yoga-guidance').textContent = message;
+                document.getElementById('yoga-timer').textContent = '00:00';
+                document.querySelector('#card-2 .btn').textContent = 'Start Flow';
+                speak(message, 0.9);
+                return;
+            }
+
+            const currentPose = yogaFlow[poseIndex];
+
+            // Announce the start of a new pose 
+            if (yogaTime === currentPoseStartTime) {
+                speak(currentPose.speakStart, 0.9);
+            }
+
+            yogaTime++;
+
+            // Time for current pose
+            const poseElapsedTime = yogaTime - currentPoseStartTime;
+            const poseTimeLeft = currentPose.duration - poseElapsedTime;
+
+            // Check if current pose duration is finished
+            if (poseTimeLeft <= 0) {
+                poseIndex++;
+                currentPoseStartTime = yogaTime;
+                speak('Time is up. Transition now.', 1.1);
+                return;
+            }
+
+            // Announce 10-second warning
+            if (poseTimeLeft === 10) {
+                speak(`Ten seconds remaining in ${currentPose.name}.`, 1.1);
+            }
+
+            // Format time
+            const minutes = Math.floor(poseTimeLeft / 60).toString().padStart(2, '0');
+            const seconds = (poseTimeLeft % 60).toString().padStart(2, '0');
+
+            // Update display
+            document.getElementById('yoga-timer').textContent = `${minutes}:${seconds}`;
+            document.getElementById('yoga-guidance').textContent = `Current: ${currentPose.name} (${poseTimeLeft}s remaining)`;
+        }
+    </script>
+
+</body>
+
+</html>

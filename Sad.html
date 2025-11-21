@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sad Support Corner</title>
+
+    <style>
+        /* BASE STYLES */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #7fd5dd;
+            /* Soft pink for emotional comfort */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            color: #4a148c;
+        }
+
+        h1 {
+            font-size: 2.6em;
+            margin-top: 0;
+        }
+
+        .emoji {
+            font-size: 4em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 350px;
+            text-align: left;
+        }
+
+        .card h2 {
+            color: #ad1457;
+            border-bottom: 2px solid #f8bbd0;
+            padding-bottom: 8px;
+        }
+
+        .btn {
+            background-color: #d81b60;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #ad1457;
+        }
+
+        /* New style for the 'Next Option' button for visual distinction */
+        .next-btn {
+            background-color: #4db6ac;
+            /* Calming teal color */
+            margin-top: 15px;
+        }
+
+        .next-btn:hover {
+            background-color: #26a69a;
+        }
+
+        textarea {
+            width: 95%;
+            /* Adjusted width for padding consistency */
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #e91e63;
+            margin-top: 10px;
+            font-size: 15px;
+            resize: vertical;
+        }
+
+        #aiResponse {
+            background: #f8bbd0;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: none;
+            color: #4a148c;
+            font-weight: bold;
+        }
+
+        /* --- Memory Game Styles (NEW) --- */
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .game-card {
+            background-color: #fff3e0;
+            /* Light orange/cream color for contrast */
+            border: 2px solid #ffab91;
+            border-radius: 8px;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+            cursor: pointer;
+            user-select: none;
+            perspective: 1000px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .game-card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-back {
+            background-color: #ad1457;
+            /* Dark pink from the theme */
+            color: white;
+            font-size: 1.5em;
+            transform: rotateY(0deg);
+        }
+
+        .card-front {
+            background-color: #ffffff;
+            color: #333;
+            transform: rotateY(180deg);
+        }
+
+        .game-card.matched {
+            pointer-events: none;
+            opacity: 0.5;
+            border-color: #e91e63;
+        }
+
+        #game-status {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #e91e63;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="text-align:left; margin-top: 10px;">
+        <a href="HomePage.html" style="
+           display:inline-block;
+           background-color:#5ff7ea;
+           color:white;
+           padding:10px 20px;
+           border-radius:6px;
+           text-decoration:none;
+           font-size:16px;
+           transition:0.3s;
+       ">
+            ⬅ Back
+        </a>
+    </div>
+    <div class=" emoji">😢
+    </div>
+    <h1>Sad Support Corner</h1>
+    <p>You’re not alone. Let’s make you feel a little better ❤️</p>
+
+    <div class="container">
+
+        <div class="card">
+            <h2>Watch a Funny Video 😂</h2>
+            <p id="funny-video-description">A little bit of silliness can help. Watch this and try not to smile!</p>
+            <iframe id="funny-video-iframe" width="100%" height="200" src="https://www.youtube.com/embed/zzfQwXEqYaI"
+                frameborder="0" allowfullscreen>
+            </iframe>
+            <button class="btn next-btn" onclick="nextFunnyVideo()">Next Funny Video Option</button>
+        </div>
+
+        <div class="card">
+            <h2>Tell What Made You Sad 💭</h2>
+            <textarea id="sadInput" rows="4" placeholder="Write what made you sad..."></textarea>
+            <button class="btn" onclick="consoleUser()">Get AI Consoling</button>
+
+            <div id="aiResponse">I'm here for you. Share your thoughts above.</div>
+        </div>
+
+        <div class="card">
+            <h2>Mood-Lifting Music 🎶</h2>
+            <p id="music-description">Listen to some gentle, calming music to help regulate your mood.</p>
+            <iframe id="music-iframe" width="100%" height="200" src="https://www.youtube.com/embed/2OEL4P1Rz04"
+                frameborder="0" allowfullscreen>
+            </iframe>
+            <button class="btn next-btn" onclick="nextMusicVideo()">Next Music Option</button>
+        </div>
+
+        <div class="card">
+            <h2>🧠Emoji Match Game</h2>
+            <p>Distract your mind! Match the pairs of happy emojis.</p>
+            <div id="game-board">
+            </div>
+            <div id="game-status">Click Start Game to begin!</div>
+            <button class="btn" onclick="startGame()">Start Game</button>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 1 & 3. Video/Music Options Logic ---
+        const funnyVideos = [
+            { id: "zzfQwXEqYaI", title: "Funny Cats Compilation", desc: "A little bit of silliness can help. Watch this and try not to smile!" },
+            { id: "hV_2n_9l120", title: "Baby Laughing Hysterically", desc: "Pure joy is infectious! Watch this baby's hilarious laugh." },
+            { id: "yWkM890p_w0", title: "Dogs Failing at Simple Tasks", desc: "A collection of clumsy but lovable dog moments." }
+        ];
+
+        const soothingMusic = [
+            { id: "2OEL4P1Rz04", title: "Soft Relaxing Music", desc: "Listen to some gentle, calming piano music to help regulate your mood." },
+            { id: "S_ncC6m4qM8", title: "Deep Focus Ambient Waves", desc: "Calm your mind with peaceful ambient soundscapes." },
+            { id: "DX-zF1k2s0I", title: "Cozy Lofi Chill Beats", desc: "A warm and inviting collection of lofi music." }
+        ];
+
+        let currentFunnyIndex = 0;
+        let currentMusicIndex = 0;
+
+        function updateVideo(id, iframeId, title, desc, descId) {
+            const iframe = document.getElementById(iframeId);
+            const descriptionElement = document.getElementById(descId);
+            iframe.src = `https://www.youtube.com/embed/${id}`;
+            iframe.title = title;
+            descriptionElement.textContent = desc;
+        }
+
+        function nextFunnyVideo() {
+            currentFunnyIndex = (currentFunnyIndex + 1) % funnyVideos.length;
+            const video = funnyVideos[currentFunnyIndex];
+            updateVideo(video.id, 'funny-video-iframe', video.title, video.desc, 'funny-video-description');
+        }
+
+        function nextMusicVideo() {
+            currentMusicIndex = (currentMusicIndex + 1) % soothingMusic.length;
+            const video = soothingMusic[currentMusicIndex];
+            updateVideo(video.id, 'music-iframe', video.title, video.desc, 'music-description');
+        }
+
+
+        // --- 2. AI Consolation Logic ---
+        function consoleUser() {
+            let text = document.getElementById("sadInput").value.trim();
+            let box = document.getElementById("aiResponse");
+
+            if (text.length === 0) {
+                box.style.display = "block";
+                box.innerHTML = "Please share something so I can comfort you ❤️";
+                return;
+            }
+
+            let replies = [
+                "I'm really sorry you feel this way. You deserve kindness and peace.",
+                "That sounds really tough. I'm here with you, and you're doing your best ❤️",
+                "You are stronger than you think. This moment will pass, I promise.",
+                "Even storms run out of rain — you won’t feel like this forever.",
+                "It's okay to feel sad. Your feelings are real and valid."
+            ];
+
+            let randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+            box.style.display = "block";
+            box.innerHTML = randomReply;
+            document.getElementById("sadInput").value = ""; // Clear input after response
+        }
+
+        // --- 4. Memory Game Logic (NEW) ---
+        const emojis = ['😊', '🥳', '🌟', '😇', '😊', '🥳', '🌟', '😇']; // 4 pairs for an 8-card game
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let lockBoard = false;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function createBoard() {
+            const board = document.getElementById('game-board');
+            board.innerHTML = '';
+            shuffleArray(emojis);
+            matchedPairs = 0;
+
+            emojis.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.classList.add('game-card');
+                card.dataset.emoji = emoji;
+                card.dataset.index = index;
+                card.onclick = flipCard;
+
+                card.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-face card-back">?</div>
+                    <div class="card-face card-front">${emoji}</div>
+                </div>
+            `;
+                board.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (lockBoard || this.classList.contains('flipped') || this.classList.contains('matched')) return;
+
+            this.classList.add('flipped');
+            flippedCards.push(this);
+
+            if (flippedCards.length === 2) {
+                lockBoard = true;
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+            const [card1, card2] = flippedCards;
+            const isMatch = card1.dataset.emoji === card2.dataset.emoji;
+
+            if (isMatch) {
+                disableCards(card1, card2);
+            } else {
+                unflipCards();
+            }
+            document.getElementById('game-status').textContent = isMatch ? 'Match Found! Keep going.' : 'No match. Try again!';
+        }
+
+        function disableCards(card1, card2) {
+            card1.classList.add('matched');
+            card2.classList.add('matched');
+            matchedPairs++;
+            resetBoard();
+
+            if (matchedPairs === (emojis.length / 2)) {
+                document.getElementById('game-status').textContent = '🎉 You Win! Great job distracting your mind!';
+            }
+        }
+
+        function unflipCards() {
+            setTimeout(() => {
+                flippedCards.forEach(card => card.classList.remove('flipped'));
+                resetBoard();
+            }, 1000);
+        }
+
+        function resetBoard() {
+            [flippedCards, lockBoard] = [[], false];
+        }
+
+        function startGame() {
+            createBoard();
+            document.getElementById('game-status').textContent = 'Find the matching pairs!';
+        }
+
+        // Initialize the board display and load initial videos on load
+        document.addEventListener('DOMContentLoaded', () => {
+            startGame();
+            // Load initial content for video/music descriptions
+            document.getElementById('funny-video-description').textContent = funnyVideos[0].desc;
+            document.getElementById('music-description').textContent = soothingMusic[0].desc;
+            document.getElementById('aiResponse').style.display = "block"; // Make initial message visible
+        });
+    </script>
+
+</body>
+
+</html>

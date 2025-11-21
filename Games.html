@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Fun Games — Happy Hub 🎮</title>
+    <style>
+        /* ====== General layout ====== */
+        :root {
+            --bg: #f6f8fb;
+            --card: #ffffff;
+            --accent: #ff9800;
+            --accent-2: #00bfa6;
+            --muted: #6b7280;
+            --glass: rgba(255, 255, 255, 0.6);
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, #eef6ff 0%, var(--bg) 100%);
+            color: #111827;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 28px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        header {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .logo {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            background: linear-gradient(135deg, var(--accent), #ffb74d);
+            color: white;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            font-size: 20px;
+            margin: 0
+        }
+
+        p.lead {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        nav.actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        a.btn {
+            background: var(--card);
+            border: 1px solid rgba(16, 24, 40, 0.06);
+            padding: 8px 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: inherit;
+            box-shadow: 0 4px 14px rgba(16, 24, 40, 0.04);
+            font-weight: 600;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* ====== Playground grid ====== */
+        .grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        @media (max-width:880px) {
+            .grid {
+                grid-template-columns: 1fr;
+                padding-bottom: 40px;
+            }
+        }
+
+        .panel {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 16px;
+            box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+        }
+
+        /* ====== Game selector ====== */
+        .games-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .game-item {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all .18s ease;
+        }
+
+        .game-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+        }
+
+        .game-item.active {
+            border-color: rgba(255, 152, 0, 0.18);
+            background: linear-gradient(90deg, rgba(255, 152, 0, 0.06), rgba(0, 191, 166, 0.02));
+        }
+
+        .game-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            font-size: 26px;
+            background: var(--glass);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .game-meta h3 {
+            margin: 0;
+            font-size: 15px
+        }
+
+        .game-meta p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        /* ====== Tic-Tac-Toe ====== */
+        .ttt-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 14px;
+            max-width: 420px;
+        }
+
+        .ttt-cell {
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #fff, #fbfbfb);
+            display: grid;
+            place-items: center;
+            font-size: 44px;
+            cursor: pointer;
+            border: 1px solid rgba(16, 24, 40, 0.05);
+            user-select: none;
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+
+        .ttt-cell:active {
+            transform: scale(.98)
+        }
+
+        .ttt-info {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 12px;
+            color: var(--muted)
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #ffecb5, #ffe6b3);
+            border-color: rgba(255, 152, 0, 0.18);
+        }
+
+        /* ====== Memory game ====== */
+        .mem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .card {
+            border-radius: 10px;
+            aspect-ratio: 1/1;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            cursor: pointer;
+            background: linear-gradient(180deg, #ffffff, #f7f9fc);
+            border: 1px solid rgba(16, 24, 40, 0.04);
+            user-select: none;
+            transform-style: preserve-3d;
+            perspective: 600px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            border-radius: 10px;
+            place-items: center;
+            transition: transform .45s;
+            transform-style: preserve-3d;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            backface-visibility: hidden;
+        }
+
+        .card-front {
+            transform: rotateY(180deg);
+            font-size: 26px;
+        }
+
+        .card-back {
+            font-size: 20px;
+            color: var(--muted)
+        }
+
+        /* small helper styles */
+        .muted {
+            color: var(--muted)
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        button.action {
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 0;
+            background: var(--accent);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(255, 152, 0, 0.12);
+        }
+
+        button.ghost {
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(16, 24, 40, 0.06);
+            background: transparent;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 13px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="logo">😊</div>
+                <div>
+                    <h1>Fun Games <small style="font-size:13px;color:var(--muted)">— quick mini-games to lift the
+                            mood</small></h1>
+                    <p class="lead">Play Tic-Tac-Toe or Memory Match. Scores and stats reset when you refresh.</p>
+                </div>
+            </div>
+
+            <nav class="actions">
+                <a class="btn" href="HomePage.html" title="Back to main page">← Back</a>
+                <a class="btn" href="#ttt" id="quick-ttt">Play Tic-Tac-Toe</a>
+                <a class="btn" href="#mem" id="quick-mem">Memory Match</a>
+            </nav>
+        </header>
+
+        <div class="grid">
+            <!-- Left column: selector -->
+            <aside class="panel">
+                <h3 style="margin-top:0">Choose a game</h3>
+                <div class="games-list">
+                    <div class="game-item active" data-game="ttt" id="sel-ttt" role="button" tabindex="0"
+                        aria-pressed="true">
+                        <div class="game-icon">❌</div>
+                        <div class="game-meta">
+                            <h3>Tic-Tac-Toe</h3>
+                            <p>Local 2-player — classic 3×3 grid. Try to get three in a row!</p>
+                        </div>
+                    </div>
+
+                    <div class="game-item" data-game="mem" id="sel-mem" role="button" tabindex="0" aria-pressed="false">
+                        <div class="game-icon">🧠</div>
+                        <div class="game-meta">
+                            <h3>Memory Match</h3>
+                            <p>Flip tiles and find matching emoji pairs. Improve your short-term memory!</p>
+                        </div>
+                    </div>
+
+                    <div
+                        style="padding:12px;color:var(--muted);font-size:13px;border-radius:10px;background:linear-gradient(180deg,transparent,#fff);margin-top:8px">
+                        Tips:
+                        <ul style="margin:8px 0 0 18px;color:var(--muted);">
+                            <li>Use keyboard: Enter/Space to switch items and play.</li>
+                            <li>Click Reset in each game to start fresh.</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right column: game area -->
+            <main class="panel" id="game-area" aria-live="polite">
+                <!-- Tic-Tac-Toe panel -->
+                <section id="ttt-panel" style="display:block">
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+                        <div>
+                            <h2 style="margin:0 0 6px 0">Tic-Tac-Toe</h2>
+                            <div class="ttt-info">
+                                <div id="ttt-turn">Turn: <strong id="ttt-player">X</strong></div>
+                                <div class="muted">|</div>
+                                <div id="ttt-result" class="muted">Make a move</div>
+                            </div>
+                        </div>
+                        <div class="controls">
+                            <button class="action" id="ttt-reset">Reset Game</button>
+                            <button class="ghost" id="ttt-rules">Rules</button>
+                        </div>
+                    </div>
+
+                    <div class="ttt-board" id="ttt-board" role="grid" aria-label="Tic tac toe board"
+                        style="margin-top:14px">
+                        <!-- 9 cells created by JS -->
+                    </div>
+                </section>
+
+                <!-- Memory Match panel -->
+                <section id="mem-panel" style="display:none">
+                    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+                        <div>
+                            <h2 style="margin:0 0 6px 0">Memory Match</h2>
+                            <div class="muted" id="mem-status">Find all pairs!</div>
+                        </div>
+                        <div class="controls">
+                            <button class="action" id="mem-reset">New Board</button>
+                            <button class="ghost" id="mem-easy">Easy (3×4)</button>
+                            <button class="ghost" id="mem-hard">Hard (4×4)</button>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:10px" id="mem-stats" class="muted">Moves: <span id="mem-moves">0</span> •
+                        Matched: <span id="mem-matched">0</span></div>
+
+                    <div class="mem-grid" id="mem-grid" aria-live="polite" style="margin-top:12px">
+                        <!-- cards inserted by JS -->
+                    </div>
+                </section>
+
+                <footer>
+                    Built with ♥ for Happy Hub — refresh to fully reset all game state.
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        /***********************
+         * Game selection UI
+         ***********************/
+        const selTtt = document.getElementById('sel-ttt');
+        const selMem = document.getElementById('sel-mem');
+        const tttPanel = document.getElementById('ttt-panel');
+        const memPanel = document.getElementById('mem-panel');
+
+        function setActive(game) {
+            if (game === 'ttt') {
+                selTtt.classList.add('active'); selTtt.setAttribute('aria-pressed', 'true');
+                selMem.classList.remove('active'); selMem.setAttribute('aria-pressed', 'false');
+                tttPanel.style.display = 'block'; memPanel.style.display = 'none';
+            } else {
+                selMem.classList.add('active'); selMem.setAttribute('aria-pressed', 'true');
+                selTtt.classList.remove('active'); selTtt.setAttribute('aria-pressed', 'false');
+                memPanel.style.display = 'block'; tttPanel.style.display = 'none';
+            }
+        }
+        selTtt.addEventListener('click', () => setActive('ttt'));
+        selMem.addEventListener('click', () => setActive('mem'));
+        selTtt.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setActive('ttt') });
+        selMem.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') setActive('mem') });
+
+        document.getElementById('quick-ttt').addEventListener('click', () => setActive('ttt'));
+        document.getElementById('quick-mem').addEventListener('click', () => setActive('mem'));
+
+        /***********************
+         * Tic-Tac-Toe (Local 2-player)
+         ***********************/
+        const tttBoardEl = document.getElementById('ttt-board');
+        const tttPlayerEl = document.getElementById('ttt-player');
+        const tttResultEl = document.getElementById('ttt-result');
+        const tttResetBtn = document.getElementById('ttt-reset');
+
+        let tttState = {
+            board: Array(9).fill(null),
+            player: 'X',
+            over: false
+        };
+
+        const winCombos = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        function renderTtt() {
+            tttBoardEl.innerHTML = '';
+            tttBoardEl.setAttribute('aria-label', 'Tic tac toe board - turn ' + tttState.player);
+            tttState.board.forEach((v, i) => {
+                const cell = document.createElement('button');
+                cell.className = 'ttt-cell';
+                cell.setAttribute('data-index', i);
+                cell.setAttribute('role', 'gridcell');
+                cell.setAttribute('aria-label', 'Cell ' + (i + 1) + (v ? (', ' + v) : ''));
+                cell.innerText = v || '';
+                cell.addEventListener('click', onTttClick);
+                cell.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') onTttClick({ currentTarget: cell }) });
+                tttBoardEl.appendChild(cell);
+            });
+            tttPlayerEl.innerText = tttState.player;
+            if (!tttState.over) tttResultEl.innerText = 'Make a move';
+        }
+
+        function onTttClick(e) {
+            if (tttState.over) return;
+            const el = e.currentTarget;
+            const idx = Number(el.getAttribute('data-index'));
+            if (tttState.board[idx]) return;
+            tttState.board[idx] = tttState.player;
+            const winner = checkWinner(tttState.board);
+            if (winner) {
+                tttState.over = true;
+                tttResultEl.innerHTML = '<strong>' + winner + ' wins!</strong>';
+                highlightWin(winner.combo);
+            } else if (tttState.board.every(Boolean)) {
+                tttState.over = true;
+                tttResultEl.innerHTML = '<strong>It\'s a draw!</strong>';
+            } else {
+                tttState.player = tttState.player === 'X' ? 'O' : 'X';
+            }
+            renderTtt();
+        }
+
+        function checkWinner(b) {
+            for (const combo of winCombos) {
+                const [a, b1, c] = combo;
+                if (tttState.board[a] && tttState.board[a] === tttState.board[b1] && tttState.board[a] === tttState.board[c]) {
+                    return { player: tttState.board[a], combo };
+                }
+            }
+            return null;
+        }
+
+        function highlightWin(combo) {
+            // highlight the winning cells
+            const cells = tttBoardEl.querySelectorAll('.ttt-cell');
+            combo.forEach(i => {
+                cells[i].classList.add('highlight');
+            });
+        }
+
+        function resetTtt() {
+            tttState = { board: Array(9).fill(null), player: 'X', over: false };
+            // remove highlights on next render
+            renderTtt();
+            tttResultEl.innerText = 'Game reset — make a move';
+        }
+
+        tttResetBtn.addEventListener('click', resetTtt);
+        document.getElementById('ttt-rules').addEventListener('click', () => alert('Tic-Tac-Toe rules:\\n- Players take turns placing X or O.\\n- First to make 3 in a row (horizontal, vertical, diagonal) wins.\\n- If all cells filled and no winner, it is a draw.'));
+
+        // initial render
+        renderTtt();
+
+        /***********************
+         * Memory Match Game
+         ***********************/
+        const memGrid = document.getElementById('mem-grid');
+        const memMovesEl = document.getElementById('mem-moves');
+        const memMatchedEl = document.getElementById('mem-matched');
+        const memResetBtn = document.getElementById('mem-reset');
+        const memStatus = document.getElementById('mem-status');
+        const memEasy = document.getElementById('mem-easy');
+        const memHard = document.getElementById('mem-hard');
+
+        let memState = {
+            size: 8, // number of cards (should be even)
+            cards: [],
+            first: null,
+            second: null,
+            lock: false,
+            moves: 0,
+            matched: 0
+        };
+
+        // emoji pool
+        const EMOJIS = ['🐶', '🐱', '🦊', '🐼', '🦁', '🐵', '🦄', '🐸', '🐙', '🐢', '🦋', '🦖', '🍓', '🍉', '🍩', '⚽️'];
+
+        function buildMemBoard(pairs = 8) {
+            const pool = EMOJIS.slice(0); // copy
+            const chosen = [];
+            while (chosen.length < pairs) {
+                const r = Math.floor(Math.random() * pool.length);
+                chosen.push(pool.splice(r, 1)[0]);
+            }
+            const cardValues = [...chosen, ...chosen]; // duplicates
+            shuffle(cardValues);
+            memState.cards = cardValues.map((val, idx) => ({
+                id: idx,
+                val,
+                flipped: false,
+                matched: false
+            }));
+            memState.first = null; memState.second = null;
+            memState.lock = false; memState.moves = 0; memState.matched = 0;
+            renderMem();
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function renderMem() {
+            memGrid.innerHTML = '';
+            memGrid.style.gridTemplateColumns = memState.size === 12 ? 'repeat(3,1fr)' : 'repeat(4,1fr)';
+            memState.cards.forEach(card => {
+                const el = document.createElement('div');
+                el.className = 'card' + (card.flipped || card.matched ? ' flipped' : '');
+                el.setAttribute('data-id', card.id);
+                el.setAttribute('tabindex', 0);
+                el.setAttribute('role', 'button');
+                el.setAttribute('aria-pressed', card.flipped || card.matched ? 'true' : 'false');
+
+                el.innerHTML = `
+          <div class="card-inner">
+            <div class="card-face card-front">${card.val}</div>
+            <div class="card-face card-back">❔</div>
+          </div>
+        `;
+                el.addEventListener('click', onCardClick);
+                el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') onCardClick({ currentTarget: el }) });
+                memGrid.appendChild(el);
+            });
+
+            memMovesEl.innerText = memState.moves;
+            memMatchedEl.innerText = memState.matched / 2; // show pairs matched
+            memStatus.innerText = `Pairs found: ${memState.matched / 2} / ${memState.cards.length / 2}`;
+        }
+
+        function onCardClick(e) {
+            if (memState.lock) return;
+            const el = e.currentTarget;
+            const id = Number(el.getAttribute('data-id'));
+            const card = memState.cards.find(c => c.id === id);
+            if (!card || card.flipped || card.matched) return;
+
+            flipCard(card);
+            if (!memState.first) {
+                memState.first = card;
+            } else if (!memState.second && card !== memState.first) {
+                memState.second = card;
+                memState.moves++;
+                memState.lock = true;
+                // check match after a short delay to show flip
+                setTimeout(checkMatch, 650);
+            }
+            renderMem();
+        }
+
+        function flipCard(card) {
+            card.flipped = true;
+        }
+
+        function checkMatch() {
+            const a = memState.first;
+            const b = memState.second;
+            if (a && b && a.val === b.val) {
+                a.matched = true; b.matched = true;
+                memState.matched += 2;
+            } else {
+                // flip back
+                a.flipped = false; b.flipped = false;
+            }
+            memState.first = null; memState.second = null; memState.lock = false;
+            // update UI and stats
+            renderMem();
+            if (memState.matched === memState.cards.length) {
+                memStatus.innerHTML = `<strong>All pairs found in ${memState.moves} moves — well done! 🎉</strong>`;
+            }
+        }
+
+        memResetBtn.addEventListener('click', () => buildMemBoard(memState.size / 2));
+        memEasy.addEventListener('click', () => { memState.size = 12; buildMemBoard(6); });
+        memHard.addEventListener('click', () => { memState.size = 16; buildMemBoard(8); });
+
+        // initial memory board
+        buildMemBoard(8); // default 4x4 (8 pairs)
+
+        /***********************
+         * Small enhancements and keyboard support
+         ***********************/
+        // Keyboard: quickly switch games with keys: 1 for TTT, 2 for Memory
+        document.addEventListener('keydown', (e) => {
+            if (e.key === '1') setActive('ttt');
+            if (e.key === '2') setActive('mem');
+            // quick reset for active game
+            if (e.key.toLowerCase() === 'r') {
+                if (selTtt.classList.contains('active')) resetTtt();
+                if (selMem.classList.contains('active')) buildMemBoard(memState.size / 2);
+            }
+        });
+
+        // small accessibility: focus first interactive element on load
+        window.addEventListener('load', () => selTtt.focus());
+    </script>
+</body>
+
+</html>

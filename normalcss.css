@@ -1,0 +1,153 @@
+/* 1. Global Styles and Background */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Soft, professional background color (Light Gray-Blue) */
+    background-color: #f0f4f8; 
+    color: #333; /* Dark text for contrast */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px; /* Max width for a clean look on large screens */
+    width: 100%;
+    padding: 30px;
+    background-color: #ffffff; /* White card background */
+    border-radius: 20px; /* Soft rounded corners */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Subtle 3D shadow */
+}
+
+/* 2. Header and Emoji Styling */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.main-emoji {
+    font-size: 80px; /* Large, prominent emoji */
+    display: block;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: #1a73e8; /* Vibrant Blue for the main title */
+    margin-bottom: 5px;
+    font-size: 2.2em;
+}
+
+.header p {
+    color: #5f6368;
+    font-size: 1.1em;
+}
+
+/* 3. Options Grid Layout */
+.options-grid {
+    display: grid;
+    /* Creates a 2x2 grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    gap: 25px; /* Spacing between blocks */
+    margin-bottom: 40px;
+}
+
+/* 4. Individual Option Block Styling (The Card Design) */
+.option-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    border-radius: 15px;
+    text-decoration: none; /* Remove underline from links */
+    color: #333;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Initial light shadow */
+}
+
+/* Hover Effect: Eye-catching for judges! */
+.option-block:hover {
+    transform: translateY(-5px); /* Lift the card slightly */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+    opacity: 0.95;
+}
+
+.option-block .icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.option-block .label {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 5. Unique Background Colors (Vibrant and Distinguishable) */
+
+/* Researching - Knowledge/Serious */
+.option-research { 
+    background-color: #e6f2ff; /* Very light Blue */
+    border: 2px solid #4285f4; 
+}
+
+/* Reading Articles - Creative/Focus */
+.option-articles { 
+    background-color: #fff5e6; /* Very light Orange/Yellow */
+    border: 2px solid #fbbc05;
+}
+
+/* Magazine - Engaging/Modern */
+.option-magazine { 
+    background-color: #e6fff2; /* Very light Green */
+    border: 2px solid #0f9d58;
+}
+
+/* Today's Newspaper - Urgent/Current */
+.option-newspaper { 
+    background-color: #f9e6ff; /* Very light Purple/Pink */
+    border: 2px solid #9c27b0; 
+}
+
+/* 6. Footer */
+.footer {
+    text-align: center;
+    color: #9aa0a6;
+    font-size: 0.9em;
+    padding-top: 20px;
+    border-top: 1px solid #e8eaed;
+}
+
+/* Media Query for Mobile Responsiveness */
+@media (max-width: 600px) {
+    .options-grid {
+        /* On small screens, stack the blocks vertically (1 column) */
+        grid-template-columns: 1fr; 
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
+
+/* TOP BACK BUTTON */
+.top-back-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #9aa0a6;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.top-back-btn:hover {
+    background-color: #7f848b;
+}

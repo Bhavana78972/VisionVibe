@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Support</title>
+
+    <style>
+        /* BASE STYLES */
+        html, body {
+            height: 100%;
+            box-sizing: border-box;
+        }
+        *, *:before, *:after { box-sizing: inherit; }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            /* softened page background (reduced a little) */
+            background-color: #0f4a92;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            color: #4a148c;
+            /* Deep purple text (cards keep their own colors) */
+            position: relative;
+        }
+
+        /* Back button (top-left) */
+        .back-btn {
+            position: fixed;
+            top: 14px;
+            left: 14px;
+            background: rgba(255,255,255,0.12);
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            backdrop-filter: blur(4px);
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.18); }
+
+        h1 {
+            font-size: 2.6em;
+            margin-top: 0;
+            color: #880e4f;
+            /* Darker theme color - overridden by .depressed-heading */
+        }
+
+        .emoji {
+            font-size: 4em;
+            animation: pulse 3s infinite;
+            color: #4a148c;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 90%;
+            max-width: 350px;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        /* Slightly smaller, constrained Immediate Support box to avoid overflow */
+        .card.immediate {
+            max-width: 330px;
+            padding: 18px;
+        }
+
+        .card h2 {
+            color: #ad1457;
+            border-bottom: 2px solid #f8bbd0;
+            padding-bottom: 8px;
+        }
+
+        .btn {
+            background-color: #d81b60;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+            text-align: center;
+            display: block;
+        }
+
+        .btn:hover { background-color: #ad1457; }
+
+        /* Used for Creative Outlet links */
+        .link-btn {
+            background-color: #4db6ac;
+            margin-top: 8px;
+            text-decoration: none;
+            padding: 12px;
+            display: block;
+            color: white;
+            border-radius: 8px;
+        }
+
+        .link-btn:hover { background-color: #26a69a; }
+
+        textarea {
+            width: 95%;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #e91e63;
+            margin-top: 10px;
+            font-size: 15px;
+            resize: vertical;
+        }
+
+        #aiResponse {
+            background: #f8bbd0;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
+            display: block;
+            color: #4a148c;
+            font-weight: bold;
+        }
+
+        /* Crisis Button specific style (anchors) */
+        .crisis-btn {
+            background-color: #ff5252;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-decoration: none;
+            text-align: center;
+            padding: 12px;
+            display: block;
+            border-radius: 8px;
+            color: #fff;
+        }
+
+        .crisis-btn:hover { background-color: #ff1744; }
+
+        /* Focused Pattern styles */
+        .pattern-box {
+            background: #fff8e1;
+            border: 2px dashed #ffb74d;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .pattern-box strong {
+            font-size: 1.2em;
+            color: #ff8f00;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .pattern-box p { margin: 5px 0; color: #333; }
+
+        /* Container centers the heading */
+        .heading-wrap { text-align: center; margin: 18px 0; }
+
+        /* Styled heading - use Algerian if available */
+        .depressed-heading {
+            display: inline-block;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: 0.4px;
+            padding: 10px 18px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2) inset;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+            font-family: 'Algerian', 'Segoe UI', Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1;
+        }
+
+        /* Make the short description below the heading larger and white */
+        .heading-wrap + p {
+            color: #ffffff;
+            font-size: 1.05rem;
+            margin-top: 8px;
+        }
+
+        /* Optional: responsive tweak */
+        @media (max-width: 480px) {
+            .depressed-heading { font-size: 1.5rem; padding: 8px 12px; }
+            .card { max-width: 92%; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Back button -->
+    <a class="back-btn" href="HomePage.html">← Back</a>
+
+    <div class="heading-wrap">
+        <h1 class="depressed-heading">Depressed 🫂</h1>
+    </div>
+
+    <p>Take a moment to breathe. You are important. Start wherever you feel comfortable.</p>
+
+    <div class="container">
+
+        <div class="card immediate">
+            <h2>🚨 Immediate Support</h2>
+            <p>If you are struggling right now, please reach out. You don't have to face this alone.</p>
+            <a href="tel:988" class="crisis-btn" target="_blank">Call/Text 988 (US Suicide & Crisis Lifeline)</a>
+            <a href="https://findahelpline.com/" class="crisis-btn" target="_blank">Find International Hotlines</a>
+            <p style="text-align: center; font-size: 0.9em; color: #ad1457; margin-top:10px;">*These links leave the site.*</p>
+        </div>
+
+        <div class="card">
+            <h2>💬 Gentle Listener</h2>
+            <p>You can talk here without judgment. Type out whatever you're feeling, big or small.</p>
+            <textarea id="sadInput" rows="4" placeholder="Type your thoughts here..."></textarea>
+            <button class="btn" onclick="consoleUser()">Get a Gentle Response</button>
+
+            <div id="aiResponse">I am here for you. Just type your feelings above when you're ready.</div>
+        </div>
+
+        <div class="card">
+            <h2>🎨 Creative Outlet</h2>
+            <p>A low-pressure way to express or distract yourself without needing a final product.</p>
+            <a href="https://quickdraw.withgoogle.com/" class="link-btn" target="_blank">Doodle Challenge (Quick Draw)</a>
+            <a href="https://www.onlinemicroscope.com/drawing-software" class="link-btn" target="_blank">Simple Digital Drawing Tool</a>
+            <a href="https://www.youtube.com/results?search_query=free+writing+prompts" class="link-btn" target="_blank">Journaling Prompts (External Video Search)</a>
+            <p style="text-align: center; font-size: 0.9em; color: #ad1457; margin-top: 15px;">*Find a pen, paper, or device and just let go.*</p>
+        </div>
+
+        <div class="card">
+            <h2>✏️ Focused Pattern Drawing</h2>
+            <p>Find a piece of paper and a pen. Follow the simple steps below to ground your mind.</p>
+
+            <div class="pattern-box">
+                <strong id="pattern-title">Step 1: The Wavy Line</strong>
+                <p id="pattern-description">Draw a continuous, wavy line across the page.</p>
+            </div>
+
+            <button class="btn" onclick="nextPattern()">Next Step / New Pattern</button>
+            <p style="text-align: center; font-size: 0.9em; color: #4a148c; margin-top: 10px;">The goal is simple focus, not artistic quality.</p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- 4. Focused Pattern Logic (NEW) ---
+        const patterns = [
+            { title: "Step 1: The Wavy Line", desc: "Draw a continuous, wavy line across the page." },
+            { title: "Step 2: Checkerboard Fill", desc: "Now, draw parallel lines intersecting the waves, creating squares. Fill every other square with gentle shading." },
+            { title: "Step 3: Repetitive Circles", desc: "Starting in a corner, draw small, overlapping circles until you fill one section of your paper." },
+            { title: "Step 4: The Triangle Grid", desc: "Draw a series of small, connected triangles forming a grid. Trace over the lines softly three times." }
+        ];
+
+        let currentPatternIndex = 0;
+
+        function nextPattern() {
+            currentPatternIndex = (currentPatternIndex + 1) % patterns.length;
+            const pattern = patterns[currentPatternIndex];
+            document.getElementById('pattern-title').textContent = pattern.title;
+            document.getElementById('pattern-description').textContent = pattern.desc;
+        }
+
+        // --- 2. Gentle Listener (AI Consolation) Logic ---
+        function consoleUser() {
+            let text = document.getElementById("sadInput").value.trim();
+            let box = document.getElementById("aiResponse");
+
+            if (text.length === 0) {
+                box.innerHTML = "Please share something so I can comfort you ❤️";
+                return;
+            }
+
+            let replies = [
+                "Thank you for sharing that. Your feelings are valid, and I'm sending you support.",
+                "I hear you. Please remember that this moment is temporary, and you've already shown great strength by reaching out.",
+                "That sounds incredibly heavy. Be gentle with yourself today. Just existing is enough right now.",
+                "It takes immense courage to open up. You are seen, and you are not alone.",
+                "I'm sorry things are so difficult right now. Take a deep breath. One tiny step is a victory."
+            ];
+
+            let randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+            box.innerHTML = randomReply;
+            document.getElementById("sadInput").value = ""; // Clear input
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial pattern message
+            const initialPattern = patterns[0];
+            document.getElementById('pattern-title').textContent = initialPattern.title;
+            document.getElementById('pattern-description').textContent = initialPattern.desc;
+        });
+    </script>
+
+</body>
+
+</html>
